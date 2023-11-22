@@ -62,49 +62,37 @@ function iniciarTest() {
         },
     ];
 
-    // Hacer las preguntas y guardar su puntaje sumado
-    for (const test of preguntas) {
-        puntaje += preguntar(test.pregunta, test.opciones, test.respuestaCorrecta, test.mensaje);
+    // Funcion de orden superior para hacer las preguntas, evaluar respuestas y sumar el puntaje obtenido.
+    preguntas.forEach((p) => {
+        let respuesta;
+        while ((respuesta != "A") && (respuesta != "B") && (respuesta != "C")) {
+            // Guarda la respuesta en mayuscula
+            respuesta = prompt("Responde con la letra de cada alternativa\n\n " + p.pregunta + "\n\n" + p.opciones).toUpperCase();
 
-        // Si el puntaje llega a 10, se termina y muestra el mensaje de exito   
-        if (puntaje >= 10) {
-            break;
+            // Si la respuesta es cualquier otra letra o numero, repite la pregunta
+            if (respuesta != "A" && respuesta != "B" && respuesta != "C") {
+                alert("Respuesta inválida, intenta de nuevo.")
+            } else if (respuesta == p.respuestaCorrecta) {// Si la respuesta coincide con al repuesta muestra el mensaje exito, guarda y suma los puntos. 
+                puntaje += 2;
+                alert("¡Correcto!\n\nTu puntaje es : " + puntaje + p.mensaje)
+            } else { // Si no, muestra el mensaje de error con un mensaje del por qué
+                alert("Respuesta incorrecta \n\nEs la alternativa " + p.respuestaCorrecta + p.mensaje)
+
+            }
         }
-    }
+    });
+
 
     // Si termina el cuestionario y no alcanza el puntaje necesario apra el premio
     if (puntaje < 10) {
-        alert("Aun no has conseguido los 10 puntos para el premio, intenta de nuevo!");
-        // break;
+        alert("No conseguiste los 10 puntos para el premio, intenta de nuevo!");
+        puntaje = 0;
     }
+    // Si el puntaje llega a 10, se termina y muestra el mensaje de exito 
     if (puntaje >= 10) {
         alert("¡Felicitaciones " + participante.nombre + "!\n\n¡Has ganado un viaje al espacio en Estación Espacial Internacional!");
-
         puntaje = 0;
     }
 
 
-}
-
-
-function preguntar(pregunta, opciones, respuestaCorrecta, mensaje) {
-    let puntos = 0;
-    let respuesta;
-
-    while ((respuesta != "A") && (respuesta != "B") && (respuesta != "C")) {
-        respuesta = prompt("Responde con la letra de cada alternativa\n\n " + pregunta + "\n\n" + opciones).toUpperCase();
-        if (respuesta != "A" && respuesta != "B" && respuesta != "C") {
-            alert("Respuesta inválida, intenta de nuevo.")
-        }
-    }
-
-    if (respuesta == respuestaCorrecta) {
-        puntos = 2;
-        alert("¡Correcto!\n\nTu puntaje es : " + (puntaje + puntos) + mensaje)
-        return puntos;
-    } else {
-        alert("Respuesta incorrecta \n\nEs la alternativa " + respuestaCorrecta + mensaje)
-        puntos = 0;
-        return puntos;
-    }
-}
+} 
