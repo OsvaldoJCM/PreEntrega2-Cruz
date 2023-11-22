@@ -1,6 +1,10 @@
 
 let puntaje = 0;
 
+// Estaría faltando un array y métodos de arrays, los que quieras usar o quizás funciones de orden superior. 
+
+const planetas = ["Mercurio", "Venus", "Tierra", "Marte", "Júpiter", "Saturno", "Urano", "Neptuno"];
+
 class Persona {
     constructor(nombre, edad, pais) {
         this.nombre = nombre;
@@ -11,15 +15,16 @@ class Persona {
         alert(this.nombre + " tu puntaje es " + puntaje);
     }
 }
+
+
 let nombre = prompt("¿Cuál es tu nombre?\n\n ");
 let edad = prompt("¿Qué edad tienes?\n\n ");
 let pais = prompt("¿De qué pais eres?\n\n ");
 
 const participante = new Persona(nombre, edad, pais);
 
-function iniciarTest() {
-    puntaje = 0;
 
+function iniciarTest() {
     let preguntas = [
         {
             pregunta: "¿De qué color es el sol?",
@@ -30,7 +35,7 @@ function iniciarTest() {
         },
         {
             pregunta: "¿Cuántos planetas hay actualmente en nuestro sistema solar?",
-            opciones: "A : 10 \nB : 9 \nC : 8",
+            opciones: "A : 10 \nB : 9 \nC : " + planetas.length + "",
             respuestaCorrecta: "C",
             mensaje:
                 "\n\nPlutón fue considerado durante mucho tiempo el noveno planeta de nuestro sistema solar. Hasta 2006 cuando se redefinió lo que significa ser un planeta y en vista de los nuevos requisitos quedó fuera de los otros 8 con la categoría de planeta menor.",
@@ -46,7 +51,7 @@ function iniciarTest() {
             pregunta: "¿Cual es el planeta que está más cerca del sol?",
             opciones: "A : Marte\nB : Mercurio\nC : Venus",
             respuestaCorrecta: "B",
-            mensaje: "\n\nDespués el sol viene Mercurio, Venus, Tierra, Marte, Júpiter, Saturno, Urano y Neptuno",
+            mensaje: "\n\nDespués el sol el orden es : " + planetas.join(", ") + ".",
         },
         {
             pregunta: "¿Cual es el planeta más caliente del sistema solar?",
@@ -57,23 +62,27 @@ function iniciarTest() {
         },
     ];
 
+    // Hacer las preguntas y guardar su puntaje sumado
     for (const test of preguntas) {
         puntaje += preguntar(test.pregunta, test.opciones, test.respuestaCorrecta, test.mensaje);
+
+        // Si el puntaje llega a 10, se termina y muestra el mensaje de exito   
+        if (puntaje >= 10) {
+            break;
+        }
     }
 
-    // Mensaje por si no se alcanza el puntaje min para el premio
-    while (puntaje < 10) {
+    // Si termina el cuestionario y no alcanza el puntaje necesario apra el premio
+    if (puntaje < 10) {
         alert("Aun no has conseguido los 10 puntos para el premio, intenta de nuevo!");
-        // puntaje = 0;
-        break;
+        // break;
+    }
+    if (puntaje >= 10) {
+        alert("¡Felicitaciones " + participante.nombre + "!\n\n¡Has ganado un viaje al espacio en Estación Espacial Internacional!");
+
+        puntaje = 0;
     }
 
-    // Premio
-    while (puntaje >= 10) {
-        alert("¡Felicitaciones " + participante.nombre + "!\n\n¡Has ganado un viaje al espacio en Estación Espacial Internacional!");
-        // puntaje = 0;
-        break;
-    }
 
 }
 
