@@ -72,7 +72,7 @@ function iniciarTest() {
             // Si la respuesta es cualquier otra letra o numero, repite la pregunta
             if (respuesta != "A" && respuesta != "B" && respuesta != "C") {
                 alert("Respuesta inválida, intenta de nuevo.")
-            } else if (respuesta == p.respuestaCorrecta) {// Si la respuesta coincide con al repuesta muestra el mensaje exito, guarda y suma los puntos. 
+            } else if (respuesta == p.respuestaCorrecta) {// Si es la respuesta correcta muestra el mensaje de exito, guarda y suma los puntos. 
                 puntaje += 2;
                 alert("¡Correcto!\n\nTu puntaje es : " + puntaje + p.mensaje)
             } else { // Si no, muestra el mensaje de error con un mensaje del por qué
@@ -83,7 +83,7 @@ function iniciarTest() {
     });
 
 
-    // Si termina el cuestionario y no alcanza el puntaje necesario apra el premio
+    // Si termina el cuestionario y no alcanza el puntaje necesario para el premio
     if (puntaje < 10) {
         alert("No conseguiste los 10 puntos para el premio, intenta de nuevo!");
         puntaje = 0;
